@@ -110,9 +110,9 @@ setMethod("predict", signature(object="cenreg-lognormal"),
     var    = object@survreg$var[-df, -df]
     scale  = object@survreg$scale
     varsig = object@survreg$var[df, df] * scale^2
-    cov    = p %*% (object@survreg$var[df,][-df] * scale)
+    cov    = as.vector(p %*% (object@survreg$var[df,][-df] * scale))
 
-    varmean = t(p) %*% var %*% p
+    varmean = as.vector(t(p) %*% var %*% p)
 
     qhat = exp(sum(p * coefs) + (qnorm(q) * scale))
 
